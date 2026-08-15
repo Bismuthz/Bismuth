@@ -15,8 +15,6 @@ supportedGames.BLOXSTRIKE = {
 
 		Madium = "Detected",
 		Velocity = "Detected",
-		Xeno = "Detected",
-		Solara = "Detected",
 		Real = "Detected",
 	},
 }
