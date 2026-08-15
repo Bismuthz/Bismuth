@@ -79,11 +79,34 @@ if not supportedGames then
 	return kickPlayer("supportedGames.lua returned nothing")
 end
 
+local function statusForExecutor(gameInfo)
+	local name = string.lower(executor)
+	local marked = gameInfo.executorStatus
+
+	if marked then
+		for key, status in pairs(marked) do
+			local lowerKey = string.lower(key)
+			if string.sub(name, 1, #lowerKey) == lowerKey then
+				return status
+			end
+		end
+	end
+
+	return gameInfo.defaultExecutorStatus or "Undetected"
+end
+
 for _, gameInfo in pairs(supportedGames) do
 	if table.find(gameInfo.placeIDs, placeID) then
 		if gameInfo.status ~= "Undetected" then
 			return kickPlayer(gameInfo.gameName .. " is currently marked " .. gameInfo.status .. " -- not loading")
 		end
+
+		local executorStatus = statusForExecutor(gameInfo)
+
+		if executorStatus ~= "Undetected" then
+			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " -- not loading")
+		end
+
 		return load(GITHUB_REPO .. gameInfo.gitPath .. "/main.luau")
 	end
 end
