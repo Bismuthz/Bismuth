@@ -10,7 +10,7 @@ if not localPlayer then
 	localPlayer = Players.LocalPlayer
 end
 
-local GITHUB_REPO = "https://raw.githubusercontent.com/Intellectlol/Intellect.lol/main/"
+local GITHUB_REPO = "https://raw.githubusercontent.com/Bismuthz/Bismuth/main/"
 local executor = identifyexecutor and identifyexecutor() or "Unknown"
 
 local selfKicked = false
@@ -19,7 +19,7 @@ local function kickPlayer(reason)
 		return
 	end
 	selfKicked = true
-	localPlayer:Kick("[Intellect.lol] " .. reason)
+	localPlayer:Kick("[Bismuth] " .. reason)
 end
 
 local REQUIRED = {
@@ -98,13 +98,13 @@ end
 for _, gameInfo in pairs(supportedGames) do
 	if table.find(gameInfo.placeIDs, placeID) then
 		if gameInfo.status ~= "Undetected" then
-			return kickPlayer(gameInfo.gameName .. " is currently marked " .. gameInfo.status .. "")
+			return kickPlayer(gameInfo.gameName .. " is currently marked " .. gameInfo.status .. " -- not loading")
 		end
 
 		local executorStatus = statusForExecutor(gameInfo)
 
 		if executorStatus ~= "Undetected" then
-			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. "")
+			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " -- not loading")
 		end
 
 		return load(GITHUB_REPO .. gameInfo.gitPath .. "/main.luau")
