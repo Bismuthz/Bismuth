@@ -98,13 +98,13 @@ end
 for _, gameInfo in pairs(supportedGames) do
 	if table.find(gameInfo.placeIDs, placeID) then
 		if gameInfo.status ~= "Undetected" then
-			return kickPlayer(gameInfo.gameName .. " is currently marked " .. gameInfo.status .. " -- not loading")
+			return kickPlayer(gameInfo.gameName .. " is currently marked " .. gameInfo.status .. " ")
 		end
 
 		local executorStatus = statusForExecutor(gameInfo)
 
 		if executorStatus ~= "Undetected" then
-			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " -- not loading")
+			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " ")
 		end
 
 		return load(GITHUB_REPO .. gameInfo.gitPath .. "/main.luau")
