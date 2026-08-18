@@ -12,12 +12,12 @@ supportedGames.BLOXSTRIKE = {
 		Potassium = "Undetected",
 		Volt = "Undetected",
 		Synz = "Undetected",
+		Real = "Undetected",
 
 		Madium = "Detected",
 		Velocity = "Detected",
 		Xeno = "Detected",
 		Solara = "Detected",
-		Real = "Detected",
 	},
 }
 
