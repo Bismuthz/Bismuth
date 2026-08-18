@@ -12,8 +12,8 @@ supportedGames.BLOXSTRIKE = {
 		Potassium = "Undetected",
 		Volt = "Undetected",
 		Synz = "Undetected",
-		Real = "Undetected",
 
+		Real = "Detected",
 		Madium = "Detected",
 		Velocity = "Detected",
 		Xeno = "Detected",
