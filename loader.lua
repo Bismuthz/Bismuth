@@ -1,45 +1,114 @@
-local supportedGames = {}
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
 
-supportedGames.BLOXSTRIKE = {
-	placeIDs = { 114234929420007, 135434213652028, 108194354348181 },
-	gitPath = "Games/Bloxstrike",
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
 
-	gameName = "BloxStrike",
-	status = "Undetected",
+if not localPlayer then
+	Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+	localPlayer = Players.LocalPlayer
+end
 
-	defaultExecutorStatus = "Undetected",
-	executorStatus = {
-		Potassium = "Undetected",
-		Volt = "Undetected",
-		Synz = "Undetected",
+local GITHUB_REPO = "https://raw.githubusercontent.com/Bismuthz/Bismuth/main/"
+local executor = identifyexecutor and identifyexecutor() or "Unknown"
 
-		Madium = "Detected",
-		Velocity = "Detected",
-		Xeno = "Detected",
-		Solara = "Detected",
-		Real = "Detected",
-	},
+local selfKicked = false
+local function kickPlayer(reason)
+	if selfKicked then
+		return
+	end
+	selfKicked = true
+	localPlayer:Kick("[Bismuth] " .. reason)
+end
+
+local REQUIRED = {
+	loadstring = loadstring,
+	cloneref = cloneref,
+	newcclosure = newcclosure,
+	clonefunction = clonefunction,
+	getupvalues = getupvalues,
+	setreadonly = setreadonly,
+	setthreadidentity = setthreadidentity,
+	getthreadidentity = getthreadidentity,
+	isrbxactive = isrbxactive,
+	["debug.info"] = debug and debug.info,
+	["debug.setupvalue"] = debug and debug.setupvalue,
+
+	getrawmetatable = getrawmetatable,
+	iscclosure = iscclosure,
+	islclosure = islclosure,
+	isexecutorclosure = isexecutorclosure,
+
+	writefile = writefile,
+	readfile = readfile,
+	isfile = isfile,
+	delfile = delfile,
+	makefolder = makefolder,
 }
 
-supportedGames.OPERATIONONE = {
-	placeIDs = { 72920620366355 },
-	gitPath = "Games/OperationOne",
+local missing = {}
 
-	gameName = "Operation One",
-	status = "Undetected",
+for name, value in pairs(REQUIRED) do
+	if type(value) ~= "function" then
+		table.insert(missing, name)
+	end
+end
 
-	defaultExecutorStatus = "Undetected",
-	executorStatus = {
-		Potassium = "Undetected",
-		Volt = "Undetected",
-		Synz = "Undetected",
-		Real = "Undetected",
+if not (Drawing and type(Drawing.new) == "function") then
+	table.insert(missing, "Drawing")
+end
 
-		Madium = "Detected",
-		Velocity = "Detected",
-		Xeno = "Detected",
-		Solara = "Detected",
-	},
-}
+if #missing > 0 then
+	table.sort(missing)
+	return kickPlayer(executor .. " is missing " .. #missing .. " required alias(es): " .. table.concat(missing, ", "))
+end
 
-return supportedGames
+local function load(url, ...)
+	local chunk = loadstring(game:HttpGet(url))
+	if not chunk then
+		return kickPlayer("syntax error in " .. url)
+	end
+	return chunk(...)
+end
+
+local placeID = game.PlaceId
+local supportedGames = load(GITHUB_REPO .. "supportedGames.lua")
+
+if not supportedGames then
+	return kickPlayer("supportedGames.lua returned nothing")
+end
+
+local function statusForExecutor(gameInfo)
+	local name = string.lower(executor)
+	local marked = gameInfo.executorStatus
+
+	if marked then
+		for key, status in pairs(marked) do
+			local lowerKey = string.lower(key)
+			if string.sub(name, 1, #lowerKey) == lowerKey then
+				return status
+			end
+		end
+	end
+
+	return gameInfo.defaultExecutorStatus or "Undetected"
+end
+
+for _, gameInfo in pairs(supportedGames) do
+	if table.find(gameInfo.placeIDs, placeID) then
+		if gameInfo.status ~= "Undetected" then
+			return kickPlayer(gameInfo.gameName .. " is currently marked " .. gameInfo.status .. " ")
+		end
+
+		local executorStatus = statusForExecutor(gameInfo)
+
+		if executorStatus ~= "Undetected" then
+			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " ")
+		end
+
+		return load(GITHUB_REPO .. gameInfo.gitPath .. "/main.luau")
+	end
+end
+
+kickPlayer("this game is unsupported (place " .. placeID .. ")")
