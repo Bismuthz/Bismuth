@@ -2,7 +2,7 @@ local supportedGames = {}
 
 supportedGames.OPERATIONONE = {
 	placeIDs = { 72920620366355 },
-	gitPath = "Games/Operation One",
+	gitPath = "Games/Operation%20One",
 
 	gameName = "Operation One",
 	status = "Undetected",
