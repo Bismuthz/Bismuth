@@ -56,7 +56,7 @@ supportedGames.VAGRANT = {
 		Synz = "Undetected",
 		Real = "Undetected",
 
-		Madium = "Detected",
+		Madium = "Undetecte",
 		Velocity = "Detected",
 		Xeno = "Detected",
 		Solara = "Detected",
