@@ -40,6 +40,11 @@ local REQUIRED = {
 	islclosure = islclosure,
 	isexecutorclosure = isexecutorclosure,
 
+	run_on_actor = run_on_actor,
+	getactors = getactors,
+	create_comm_channel = create_comm_channel,
+	get_comm_channel = get_comm_channel,
+
 	writefile = writefile,
 	readfile = readfile,
 	isfile = isfile,
@@ -63,9 +68,15 @@ if #missing > 0 then
 	table.sort(missing)
 	return kickPlayer(executor .. " is missing " .. #missing .. " required alias(es): " .. table.concat(missing, ", "))
 end
-
 local function load(url, ...)
-	local chunk = loadstring(game:HttpGet(url))
+	url = string.gsub(url, " ", "%%20")
+
+	local body = game:HttpGet(url)
+	if type(body) ~= "string" or #body == 0 then
+		return kickPlayer("empty response from " .. url)
+	end
+
+	local chunk = loadstring(body)
 	if not chunk then
 		return kickPlayer("syntax error in " .. url)
 	end
@@ -104,7 +115,7 @@ for _, gameInfo in pairs(supportedGames) do
 		local executorStatus = statusForExecutor(gameInfo)
 
 		if executorStatus ~= "Undetected" then
-			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " ")
+			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " )
 		end
 
 		return load(GITHUB_REPO .. gameInfo.gitPath .. "/main.luau")
