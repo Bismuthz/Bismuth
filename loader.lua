@@ -115,7 +115,7 @@ for _, gameInfo in pairs(supportedGames) do
 		local executorStatus = statusForExecutor(gameInfo)
 
 		if executorStatus ~= "Undetected" then
-			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " )
+			return kickPlayer(executor .. " is currently marked " .. executorStatus .. " for " .. gameInfo.gameName .. " ")
 		end
 
 		return load(GITHUB_REPO .. gameInfo.gitPath .. "/main.luau")
