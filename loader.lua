@@ -123,3 +123,4 @@ for _, gameInfo in pairs(supportedGames) do
 end
 
 kickPlayer("this game is unsupported (place " .. placeID .. ")")
+-- GITHUB PLEASE FOR THE LOVE OF GOD STOP SERVING CACHED FILES OMFG
