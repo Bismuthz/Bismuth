@@ -1,28 +1,8 @@
 local supportedGames = {}
 
-supportedGames.BLOXSTRIKE = {
-	placeIDs = { 114234929420007, 135434213652028, 108194354348181 },
-	gitPath = "Games/Bloxstrike",
-
-	gameName = "BloxStrike",
-	status = "Undetected",
-
-	defaultExecutorStatus = "Down",
-	executorStatus = {
-		Potassium = "Down",
-		Volt = "Down",
-		Synz = "Down",
-		Madium = "Down",
-		Velocity = "Down",
-		Xeno = "Down",
-		Solara = "Down",
-		Real = "Down",
-	},
-}
-
 supportedGames.OPERATIONONE = {
 	placeIDs = { 72920620366355 },
-	gitPath = "Games/Operation%20One",
+	gitPath = "Games/Operation One",
 
 	gameName = "Operation One",
 	status = "Undetected",
@@ -38,13 +18,13 @@ supportedGames.OPERATIONONE = {
 		Velocity = "Detected",
 		Xeno = "Detected",
 		Solara = "Detected",
+		Delta = "Detected",
 	},
 }
 
-
 supportedGames.VAGRANT = {
 	placeIDs = { 100283815455755 },
-	gitPath = "Games/Vagrant%20Survival",
+	gitPath = "Games/Vagrant Survival",
 
 	gameName = "Vagrant Survival",
 	status = "Undetected",
@@ -56,10 +36,33 @@ supportedGames.VAGRANT = {
 		Synz = "Undetected",
 		Real = "Undetected",
 
-		Madium = "Undetecte",
+		Madium = "Detected",
 		Velocity = "Detected",
 		Xeno = "Detected",
 		Solara = "Detected",
+		Delta = "Detected",
+	},
+}
+
+supportedGames.TOWN = {
+	placeIDs = { 4991214437 },
+	gitPath = "Games/Town",
+
+	gameName = "Town",
+	status = "Undetected",
+
+	defaultExecutorStatus = "Undetected",
+	executorStatus = {
+		Potassium = "Undetected",
+		Volt = "Undetected",
+		Synz = "Undetected",
+		Real = "Undetected",
+
+		Madium = "Detected",
+		Velocity = "Detected",
+		Xeno = "Detected",
+		Solara = "Detected",
+		Delta = "Detected",
 	},
 }
 
