@@ -66,4 +66,26 @@ supportedGames.TOWN = {
 	},
 }
 
+supportedGames.QUICKDRAW = {
+	placeIDs = { 15561786880 },
+	gitPath = "Games/Quickdraw Legacy",
+
+	gameName = "Quickdraw Legacy",
+	status = "Undetected",
+
+	defaultExecutorStatus = "Undetected",
+	executorStatus = {
+		Potassium = "Undetected",
+		Volt = "Undetected",
+		Synz = "Undetected",
+		Real = "Undetected",
+
+		Madium = "Detected",
+		Velocity = "Detected",
+		Xeno = "Detected",
+		Solara = "Detected",
+		Delta = "Detected",
+	},
+}
+
 return supportedGames
