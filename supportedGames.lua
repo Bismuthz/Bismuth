@@ -7,7 +7,7 @@ supportedGames.OPERATIONONE = {
 	gameName = "Operation One",
 	status = "Undetected",
 
-	defaultExecutorStatus = "Undetected",
+	defaultExecutorStatus = "Detected",
 	executorStatus = {
 		Potassium = "Undetected",
 		Volt = "Undetected",
@@ -29,7 +29,7 @@ supportedGames.VAGRANT = {
 	gameName = "Vagrant Survival",
 	status = "Undetected",
 
-	defaultExecutorStatus = "Undetected",
+	defaultExecutorStatus = "Detected",
 	executorStatus = {
 		Potassium = "Undetected",
 		Volt = "Undetected",
@@ -51,7 +51,7 @@ supportedGames.TOWN = {
 	gameName = "Town",
 	status = "Undetected",
 
-	defaultExecutorStatus = "Undetected",
+	defaultExecutorStatus = "Detected",
 	executorStatus = {
 		Potassium = "Undetected",
 		Volt = "Undetected",
@@ -71,9 +71,9 @@ supportedGames.QUICKDRAW = {
 	gitPath = "Games/Quickdraw Legacy",
 
 	gameName = "Quickdraw Legacy",
-	status = "Undetected",
+	status = "Detected",
 
-	defaultExecutorStatus = "Undetected",
+	defaultExecutorStatus = "Detected",
 	executorStatus = {
 		Potassium = "Undetected",
 		Volt = "Undetected",
